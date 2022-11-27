@@ -1,0 +1,37 @@
+{
+  "name": "nahs-Bricks-Feature-Bat",
+  "version": "1.3.1",
+  "description": "Implements the feature All for NAHS-Bricks which cares about battery detection and charging.",
+  "keywords": "NAHS-Bricks, feature",
+  "repository":
+  {
+    "type": "git",
+    "url": "git@github.com:NAHS-Bricks/Feature-Bat.git"
+  },
+  "authors":
+  [
+    {
+      "name": "Nils Ost",
+      "email": "home@nijos.de",
+      "url": "https://nijos.de",
+      "maintainer": true
+    }
+  ],
+  "exclude": [
+    ".gitignore"
+  ],
+  "license": "GPL-3.0",
+  "homepage": "https://bricks.nijos.de/",
+  "dependencies": {
+      "bblanchon/ArduinoJson": ">=6.17.3",
+      "nils-ost/nahs-Bricks-Lib-FSmem": ">=1.1.1",
+      "nils-ost/nahs-Bricks-Lib-RTCmem": ">=1.1.1",
+      "nils-ost/nahs-Bricks-Lib-SerHelp": ">=0.2.0",
+      "nils-ost/nahs-Bricks-Lib-CoIC": ">=1.0.1",
+      "nils-ost/nahs-Bricks-Feature-All": ">=1.3.0",
+      "nils-ost/nahs-Bricks-OS": ">=1.5.0"
+  },
+  "frameworks": "*",
+  "platforms": "*",
+  "examples": "examples/*/*.ino"
+}
