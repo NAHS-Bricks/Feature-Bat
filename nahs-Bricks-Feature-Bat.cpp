@@ -73,34 +73,34 @@ void NahsBricksFeatureBat::deliver(JsonDocument* out_json) {
     // send if battery is charging (and Brick is not wall-powered)
     if (bat_charging && !RTCdata->lastWasWallPowered) {
         if (!out_json->containsKey("y")) out_json->createNestedArray("y");
-        JsonArray y_array = out_json->getMember("y").as<JsonArray>();
+        JsonArray y_array = out_json->operator[]("y").as<JsonArray>();
         y_array.add("c");
     }
 
     // send if battery charging is standby (and Brick is not wall-powered)
     if (bat_standby && !RTCdata->lastWasWallPowered) {
         if (!out_json->containsKey("y")) out_json->createNestedArray("y");
-        JsonArray y_array = out_json->getMember("y").as<JsonArray>();
+        JsonArray y_array = out_json->operator[]("y").as<JsonArray>();
         y_array.add("s");
     }
 
     // send if Brick is wall-powered
     if (RTCdata->lastWasWallPowered) {
         if (!out_json->containsKey("y")) out_json->createNestedArray("y");
-        JsonArray y_array = out_json->getMember("y").as<JsonArray>();
+        JsonArray y_array = out_json->operator[]("y").as<JsonArray>();
         y_array.add("w");
     }
 
     // check if battery voltage is requested
     if (RTCdata->batVoltageRequested) {
         RTCdata->batVoltageRequested = false;
-        out_json->getOrAddMember("b").set(batVoltage);
+        out_json->operator[]("b").set(batVoltage);
     }
 
     // check if adc5V is requested
     if (RTCdata->adc5VRequested) {
         RTCdata->adc5VRequested = false;
-        out_json->getOrAddMember("a").set(FSdata["adc5V"].as<uint16_t>());
+        out_json->operator[]("a").set(FSdata["adc5V"].as<uint16_t>());
     }
 }
 
@@ -110,13 +110,13 @@ Processes feedback coming from BrickServer
 void NahsBricksFeatureBat::feedback(JsonDocument* in_json) {
     // check if new adc5V value is transmitted
     if (in_json->containsKey("a")) {
-        FSdata["adc5V"] = in_json->getMember("a").as<uint16_t>();
+        FSdata["adc5V"] = in_json->operator[]("a").as<uint16_t>();
         BricksOS.requestFSmemWrite();
     }
 
     // evaluate requests
     if (in_json->containsKey("r")) {
-        for (JsonVariant value : in_json->getMember("r").as<JsonArray>()) {
+        for (JsonVariant value : in_json->operator[]("r").as<JsonArray>()) {
             switch(value.as<uint8_t>()) {
                 case 3:
                     RTCdata->batVoltageRequested = true;
